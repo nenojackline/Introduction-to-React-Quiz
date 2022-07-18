@@ -11,13 +11,18 @@ const users = [
   { name: "Jane Doe", id: 2 },
   { name: "Billy Doe", id: 3 }
 ];
+const userList = users.map((user) => {
+  return <h1 key={user.id}>{user.name}</h1>;
+});
 
 // comment this out after completion and uncomment code below it to proceed
-function Child() {
-  return <div>This is children content</div>;
+function Child({func}) {
+  return <div>
+    This is children content
+    <button onClick={()=>func('I need to be updated from my child')}>Change</button>
+  </div>;
 }
-/**
-  Challenge: Uncomment this code to complete quiz
+  //Challenge: Uncomment this code to complete quiz
 
 function Child() {
   return (
@@ -47,8 +52,8 @@ function Parent() {
     </>
   );
 }
-Uncomment this to tackle quiz
-**/
+//Uncomment this to tackle quiz
+
 
 // Comment out after completion
 function Parent() {
@@ -62,6 +67,12 @@ function Parent() {
 
 function App() {
   const [] = React.useState(true);
+  const element = <h1>JSX is cool!</h1>
+  const [hideElement, setHideElement] = useState(true);
+
+  const toggle = () => {
+    setHideElement(false)
+  }
   return (
     
     <>
