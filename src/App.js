@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useState } from "react";
+import logo from './images/flower.jpg';
 
 
 /**
@@ -85,8 +86,8 @@ function App() {
   return (
     
     <>
-   <h1>JSX is cool!</h1>
-    <img src={'https://raw.githubusercontent.com/jsx-ir/logo/master/jsx.png'} className="App-logo" alt="logo" />
+      <img src={logo} className="App-logo" alt="logo" />
+      <h1>JSX is cool!</h1>
       <h3>User names</h3>
       <ul>{usernames}</ul>
       <button onClick={handleClick} > { toggleChallenge ? 'Hide Element Below' : 'Show Element' } </button>
