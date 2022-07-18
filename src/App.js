@@ -12,7 +12,7 @@ const users = [
   { name: "Jane Doe", id: 2 },
   { name: "Billy Doe", id: 3 }
 ];
-const userList = users.map((user) => {
+const usernames = users.map((user) => {
   return <h1 key={user.id}>{user.name}</h1>;
 });
 /** 
@@ -26,36 +26,37 @@ function Child({func}) {
 */
   //Challenge: Uncomment this code to complete quiz
 
-  function Child({update}) {
-  return (
-    <>
-      <div>Child</div>
-      <button onClick={update}>Change Parent Value</button>
-    </>
-  );
-}
-
-function Parent() {
-  const [value, setValue] = React.useState(
-    "I need to be updated from my child"
-  );
-  function update() {
-    console.log(value)
+  function Child({onButtonClick}) {
+    return (
+      <>
+        <div>Child</div>
+        <button onClick={onButtonClick}>Change Parent Value</button>
+      </>
+    );
   }
-  return (
-    <>
-      <h3>Update Parent State Challenge (Using Callback)</h3>
-      <div className="wrapper">
-        <div>Parent</div>
-        <div className="box-wrapper">{value}</div>
-      </div>
+  function Parent() {
+    const [value, setValue] = React.useState(
+      "I need to be updated from my child"
+    );
+    function handleClick(){
+      setValue('Updated from the child')
+    }
+    return (
+      <> 
+        <h3>Update Parent State Challenge (Using Callback)</h3>
+        <div className="wrapper">
+          <div>Parent</div>
+          <Child />
+          <div className="box-wrapper">{value}</div>
+        </div>
+  
+        <div className="wrapper">
+          <Child onButtonClick={handleClick}/>
+        </div>
+      </>
+    );
+  }
 
-      <div className="wrapper">
-      <Child update />
-      </div>
-    </>
-  );
-}
 //Uncomment this to tackle quiz
 
 /* 
@@ -71,37 +72,32 @@ function Parent() {
 // Comment above code after completion
 
 function App() {
-  const [] = React.useState(true);
-  const element = <h1>JSX is cool!</h1>
-  const [hide,setHide]=useState(true)
-  const [value,setValue] = useState(logo);
-  function handleImage(){
-    setValue('https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/800px-Manchester_United_FC_crest.svg.png')
+    
+  const [toggleChallenge, setToggleChallenge] = useState(false);
+  
+  
+  function handleClick() {
+    setToggleChallenge(toggleChallenge ? "" : "Toggle Challenge")
+    return toggleChallenge
   }
 
-  const toggle = () => {
-    setHideElement(false)
-  }
+  
   return (
     
     <>
-    
-    {element}
-    <img src={value} className="App-logo" alt="logo" />
+   <h1>JSX is cool!</h1>
+    <img src={'https://raw.githubusercontent.com/jsx-ir/logo/master/jsx.png'} className="App-logo" alt="logo" />
       <h3>User names</h3>
-      <ul>{users.map((item, index)=> {
-        return (
-          <li key={index}>{item.name}</li>
-        )
-      })}</ul>
-      <button onClick={toggle}>Hide Element Below</button>
-
-      {hideElement ? <div>Toggle Challenge</div> : null}
-      <Parent>
-      <Child />
-    </Parent>
-    </>
-  );
+      <ul>{usernames}</ul>
+      <button onClick={handleClick} > { toggleChallenge ? 'Hide Element Below' : 'Show Element' } </button>
+  
+  <div>{toggleChallenge}</div>
+  <Parent>
+  <Child />
+  </Parent>
+</>
+);
 }
+     
 
 export default App;
